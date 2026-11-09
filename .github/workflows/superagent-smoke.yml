@@ -24,6 +24,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue comment 3 \
+          gh issue comment 5 \
             --repo "${{ github.repository }}" \
             --body '@caomz 请修正 references/research/03-expression-dna.md 第 54 行的重复用字：把「信号的的本质是」改成「信号的本质是」。只改这一处，保持其余内容不变。'
