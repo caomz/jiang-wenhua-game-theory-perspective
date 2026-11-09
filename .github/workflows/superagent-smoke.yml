@@ -1,0 +1,29 @@
+name: superagent-smoke
+
+# Temporary workflow: it raises a request for the Super-agent from an
+# identity other than the agent account (GitHub does not notify an account
+# about its own actions, and the Source skips events authored by the agent
+# account itself). Delete this file once the smoke test is done.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/superagent-smoke.yml'
+
+permissions:
+  issues: write
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask the agent to fix a typo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment 3 \
+            --repo "${{ github.repository }}" \
+            --body '@caomz 请修正 references/research/03-expression-dna.md 第 54 行的重复用字：把「信号的的本质是」改成「信号的本质是」。只改这一处，保持其余内容不变。'
